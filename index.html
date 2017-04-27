@@ -1,0 +1,63 @@
+<html class="a-html">
+ 	<head>
+		<meta charset="utf-8">
+		<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+		<script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
+   		<script src="https://unpkg.com/aframe-layout-component@3.x.x/dist/aframe-layout-component.min.js"></script>
+   		<script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
+		<script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+		<script src="components/set-image.js"></script>
+		<script src="components/update-raycaster.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/2.3.0/nunjucks.min.js"></script>
+  		<script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+		</head>
+	<body>
+		<a-scene>
+			<a-assets>
+				<img id="dehors" crossorigin="anonymous" src="images/plan dehors_colo.jpg">
+				<img id="plan14" crossorigin="anonymous" src="images/plan 14_colo.jpg">
+				<img id="plan11" crossorigin="anonymous" src="images/plan 11_colo.jpg">
+				<img id="plan8" crossorigin="anonymous" src="images/plan8_colo_v2.jpg">
+				<img id="plan4" crossorigin="anonymous" src="images/plan 4_colo.jpg">
+				<img id="openspace1" crossorigin="anonymous" src="images/OS1_1.png">
+				<img id="openspace2" crossorigin="anonymous" src="images/OS2_1.png">
+				<img id="entrée" crossorigin="anonymous" src="images/Entrée_1.png">
+				<img id="cuisine" crossorigin="anonymous" src="images/Cuisine_1.png">
+				<img id="rue" crossorigin="anonymous" src="images/Rue_1.png">	
+				<img id="dot" crossorigin="anonymous" src="images/Dot.png">
+				<img id="booking" crossorigin="anonymous" src="images/booking.jpg">
+
+				<script id="plane" type="text/nunjucks">
+					<a-image class="link"
+       					height: "1"; width: "1"
+      					material="shader: flat; src: {{thumb}}"
+						event-set__1="_event: mousedown; scale: 1 1 1"
+      					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+      					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+      					event-set__4="_event: mouseleave; scale: 1 1 1"
+	  					set-image="on: click; target: #image-360; src: {{src }}"
+	  					update-raycaster="#cursor"
+      					></a-image>
+  					</script>  
+				</a-assets>
+
+			<a-sky id="image-360" src="#dehors" data-set-image-fade-setup="true" animation_fade rotation="0 90 0"></a-sky>  
+
+
+			<a-entity id="links" layout="layout: line; margin: 1.2" position="-2.4 0 -3">	
+				<a-entity template="src: #plane" data-thumb="#rue" data-src="#dehors"></a-entity>
+				<a-entity template="src: #plane" data-thumb="#openspace2" data-src="#plan14"></a-entity>
+				<a-entity template="src: #plane" data-thumb="#openspace1" data-src="#plan11"></a-entity>
+				<a-entity template="src: #plane" data-thumb="#cuisine" data-src="#plan8"></a-entity>
+				<a-entity template="src: #plane" data-thumb="#entrée" data-src="#plan4"></a-entity>
+				</a-entity>
+
+  			<!-- Camera + Cursor. -->
+			<a-entity camera mouse-cursor look-controls keyboard-shortcuts>
+				<a-image src="#dot" position="0.88 1.55 -2" width="0.4" height="0.3"
+      				event-set__onclick="_event: click; src: #booking; width: 2.16; height: 3.4; position: 0 0 -2;"
+					></a-image>
+				</a-entity>
+  		</a-scene>
+  		</body>
+</html>
